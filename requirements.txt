@@ -1,0 +1,28 @@
+# LINE Messaging API SDK
+line-bot-sdk==3.3.0
+
+# Google Generative AI (Gemini) - New SDK
+google-genai>=0.1.0
+
+# Web Framework
+Flask==3.0.0
+Werkzeug==3.0.1
+
+# 環境變數管理
+python-dotenv==1.0.0
+
+# 語言檢測
+langdetect==1.0.9
+
+# HTTP 客戶端
+requests==2.31.0
+
+# 日誌和監控
+python-json-logger==2.0.7
+
+# 項目開發依賴
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.12.0
+flake8==6.1.0
+pylint==3.0.3

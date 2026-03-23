@@ -205,3 +205,37 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ============================================================================
+# Project-Specific Sensitive Information (LINE Bot & Gemini API)
+# ============================================================================
+
+# API Keys and Credentials - CRITICAL
+*.key
+*.pem
+secrets/
+credentials.json
+google-credentials.json
+LINE_credentials.json
+gemini_*.json
+line_*.json
+
+# Configuration files with sensitive data
+config.local.json
+settings.local.py
+config.local.py
+secrets.local.py
+
+# IDE and Editor configurations with user data
+.vscode/settings.json
+.idea/
+*.sublime-workspace
+
+# OS and Temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.tmp/
+.cache/
