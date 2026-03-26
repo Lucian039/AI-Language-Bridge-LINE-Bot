@@ -239,3 +239,91 @@ Thumbs.db
 *~
 .tmp/
 .cache/
+
+# ============================================================================
+# AI Language Bridge LINE Bot - Project Specific
+# ============================================================================
+
+# Logs and Runtime files
+logs/
+*.log
+app.log
+debug.log
+error.log
+
+# Runtime and local state
+*.pid
+instance/
+.webassets-cache/
+
+# Local environment overrides
+.env.local
+.env.*.local
+
+# Temporary test and debug files
+.test_output/
+.debug/
+test_results/
+
+# IDE and Editor specific files (if not already covered)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.DS_Store
+
+# ngrok and local development tools
+infra/bin/ngrok.exe
+ngrok.exe
+
+# Distribution and build outputs
+dist/
+build/
+*.whl
+*.tar.gz
+
+# Documentation build outputs
+docs/_build/
+docs/build/
+site/
+
+# Type checking and linting caches
+.mypy_cache/
+.pytype/
+.pyre/
+.ruff_cache/
+
+# pytest and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Copilot skills and AI IDE configurations
+.copilot/
+.claude/
+.cursorindexingignore
+.cursorignore
+coverage.xml
+
+# Pre-commit hooks cache
+.pre-commit-framework/
+
+# Jupyter and notebook files
+.ipynb_checkpoints/
+*.ipynb
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# Keep these tracked (positive patterns)
+!.env.example
+!.env.development
+!.env.production
+!configs/.env.example
+!configs/.env.development
+!configs/.env.production
+
