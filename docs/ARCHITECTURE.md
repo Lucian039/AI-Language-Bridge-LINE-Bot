@@ -305,6 +305,61 @@ TranslationMode.SPANISH = "es"
 # 升級：Redis, SQLite, 雲端儲存
 ```
 
+## 獨立 App 架構圖
+
+如果不再依賴 LINE 作為中介，建議改成「前端 App + 後端 API + 模型服務」的三層架構：
+
+```mermaid
+flowchart TD
+   U[使用者] --> UI[前端 App\nWeb / iOS / Android / Desktop]
+   UI --> API[後端 API\nFlask / FastAPI]
+
+   API --> AUTH[登入與權限\nJWT / Session]
+   API --> PREF[使用者設定\n語言模式 / 歷史紀錄 / 詞庫]
+   API --> TRANS[翻譯服務層]
+
+   TRANS --> DETECT[語言偵測]
+   TRANS --> PROMPT[提示詞組裝]
+   TRANS --> LLM[模型推理服務\nQwen3]
+
+   LLM --> BASE[基座模型\nQwen3-Instruct]
+   LLM --> FINE[微調模型\nLoRA / SFT]
+   LLM --> SAFETY[輸出過濾\n格式校正 / 安全檢查]
+
+   API --> DB[(資料庫\nPostgreSQL / SQLite)]
+   API --> CACHE[(快取\nRedis)]
+   API --> FILE[(檔案儲存\n術語表 / 匯出檔)]
+
+   API --> OBS[監控與日誌\nLogging / Metrics / Tracing]
+
+   classDef front fill:#dff3ff,stroke:#1b6ca8,stroke-width:1px;
+   classDef backend fill:#eef7e8,stroke:#4d8b31,stroke-width:1px;
+   classDef model fill:#fff3d9,stroke:#b57600,stroke-width:1px;
+   classDef data fill:#f4e9ff,stroke:#7a4bb3,stroke-width:1px;
+   classDef ops fill:#f2f2f2,stroke:#666,stroke-width:1px;
+
+   class UI front;
+   class API,AUTH,PREF,TRANS backend;
+   class DETECT,PROMPT,LLM,BASE,FINE,SAFETY model;
+   class DB,CACHE,FILE data;
+   class OBS ops;
+```
+
+### 獨立 App 的建議模組
+
+- 前端：聊天式介面、模式切換、歷史紀錄、術語管理、匯出功能
+- 後端：使用者管理、翻譯 API、模式設定、紀錄存取、限流
+- 模型層：Qwen3 推理、LoRA 微調版本、提示詞模板、輸出格式修正
+- 資料層：翻譯記錄、使用者偏好、術語庫、評估資料集
+- 維運層：監控、日誌、錯誤追蹤、部署與版本管理
+
+### 這版架構的重點
+
+- 不再依賴 LINE webhook，使用者可直接在 App 內輸入、查看、編輯和重翻
+- 可以把翻譯歷史、術語表、個人偏好保存在自己的資料庫
+- Qwen3 可以先做推理服務，再逐步加入 LoRA 微調，不需要一開始就訓練全量模型
+- 後端與模型服務拆開後，未來也能同時支援 Web、手機 App、桌面 App
+
 ---
 
 **文檔版本**：1.0  
